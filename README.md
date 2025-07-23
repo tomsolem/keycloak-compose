@@ -37,3 +37,9 @@ Once the services are up and running, you can access the admin console at the fo
 ### Customization
 
 To customize Keycloak, edit/place your files in the `./custom` folder. All changes to this mounted volume will be checked at startup and copied over to `/opt/keycloak/`. 
+
+### Keycloak token exchange
+
+[Token exchange tutorial](https://keycloak.ch/keycloak-tutorials/tutorial-token-exchange/).
+
+See `./scrpts` folder for scripts connected to tutorial.

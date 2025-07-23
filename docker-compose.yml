@@ -26,7 +26,7 @@ services:
   keycloak:
     container_name: keycloak_server
     #image: quay.io/keycloak/keycloak:latest
-    image: quay.io/keycloak/keycloak:26.1.2
+    image: quay.io/keycloak/keycloak:26.2.5
     depends_on:
       postgres:
         condition: service_healthy
@@ -54,8 +54,28 @@ services:
       - ./bin/docker-entrypoint.sh:/home/keycloak/docker-entrypoint.sh
       - ./custom:/home/keycloak/customizations
       - ./shared:/opt/shared
+      - ./scripts:/home/keycloak/scripts
     entrypoint: ["/home/keycloak/docker-entrypoint.sh"]
     restart: unless-stopped
+
+  dev-container:
+    image: mcr.microsoft.com/devcontainers/base:ubuntu
+    container_name: keycloak_dev_container
+    networks:
+      - keycloak_network
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    depends_on:
+      - keycloak
+    environment:
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGUSER=keycloak
+      - PGPASSWORD=kc
+      - PGDATABASE=keycloak_db
+
+
 
 networks:
   keycloak_network:

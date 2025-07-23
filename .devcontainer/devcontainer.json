@@ -1,0 +1,49 @@
+{
+  "name": "Keycloak Dev Container",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "dev-container",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "zsh",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "pgsql.serverGroups": [
+        {
+            "name": "Servers",
+            "id": "D5A3D4C8-EC25-4F55-A841-69FD7EE5B84F",
+            "isDefault": true
+        }
+    ],
+    "pgsql.connections": [
+
+        {
+            "id": "B5C95F87-8B90-4863-B937-BEB2D9F11AF8",
+            "groupId": "D5A3D4C8-EC25-4F55-A841-69FD7EE5B84F",
+            "authenticationType": "SqlLogin",
+            "connectTimeout": 15,
+            "applicationName": "vscode-pgsql",
+            "clientEncoding": "utf8",
+            "sslmode": "disable",
+            "server": "postgres",
+            "user": "keycloak",
+            "password": "kc",
+            "savePassword": true,
+            "database": "keycloak_db",
+            "profileName": "keycloak_db",
+            "expiresOn": 0
+        }
+    ]
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.cpptools",
+        "ms-ossdata.vscode-pgsql"
+      ]
+    }
+  },
+  "postCreateCommand": "./.devcontainer/setup.sh"
+}
